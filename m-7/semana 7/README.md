@@ -7,16 +7,55 @@ Antonio Angelo Teixeira | Engenharia da Computação | 7 | 2
 
 ## Estrutura de Pastas
 ```
-📦semana 5
+📦semana 7
+ ┣ 📂amb
+ ┃ ┣ 📂Include
+ ┃ ┣ 📂Lib
+ ┃ ┣ 📂Scripts
+ ┃ ┣ 📂share
+ ┃ ┣ 📜pyvenv.cfg
+ ┣ 📂pages
+ ┣ 📂content
+ ┣ 📜pyvenv.cfg
  ┣ 📜Dockerfile
+ ┣ 📜logs.log
+ ┣ 📜main.py
  ┣ 📜minha_api.pkl
  ┣ 📜minha_api.py
  ┣ 📜modelo_2.pkl
- ┣ 📜requirements.txt
  ┣ 📜READ.MD
+ ┣ 📜requirements.txt
+ ┣ 📜style.css
 ```
 ## Explicação da Atividade
-A atividade proposta demanda conceitos de docker e machinelearning. O objetivo é enviar uma imagem docker de um  modelo machine learning gerado pelo Pycaret do aluno para o dockerhub. O Pycaret é um automl que testa modelos com base em um dataset e retorna o melhor modelo para aquele dataset, bem como o melhor tratamento com aquelas determinadas features.
+A atividade proposta demanda conceitos de alguns serviços AWS, machinelearning com Pycaret para Automl e streamlit para criação de dahsboards para visualização das predições realizadas. O objetivo é enviar um arquivo CSV para a API de um  modelo machine learning gerado pelo Pycaret e retorna no formato JSON a predição de cada linha do Parquet.
+Consoante a isso, o arquivo parquet selecionado pelo aluno foi "Customer Segmentation". 
+
+As colunas contidas nesse dataframe são:
+- CustomerID
+- Gender 
+- Age
+- Annual Income (k$) - COLUNA RENOMEADA APENAS PARA "INCOME" POR MOTIVOS DE PRATICIDADE
+- Spending Score (1-100) - COLUNA RENOMEADA APENAS PARA "SCORE" POR MOTIVOS DE PRATICIDADE
+
+# Tecnologias usadas
+
+As tecnologias usadas para essa ponderada são listadas abaixo e descritas:
+## Streamlit
+Streamlit é uma ferramenta Open Source que permite construir aplicações web sem necessidade de conhecimentos avançados em desenvolvimento frontend. No caso da ponderada, ele consome os dados diretamente do arquivo CSV na página main.py.
+Além disso, a estrutura do streamlit contém um diretório chamado pages, com o predict consumindo da API de predição. 
+
+Para visualização, optei por três gráficos diferentes:
+
+- Gráfico de comparação de Age x Select data. Com essa última variável podendo assumir dois valores: Income e Score
+
+<p align="center">
+<img src="(content/main_graph.png)">
+
+<p align="center"> 1 — Demonstração do processo manual de separação de amostras realizado pelo IPT.</p>
+
+</p>
+
 
 **Link para o DockerHub**: https://hub.docker.com/repository/docker/antonioangelo2/entrega5/general
 
