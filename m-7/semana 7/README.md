@@ -27,61 +27,55 @@ Antonio Angelo Teixeira | Engenharia da Computação | 7 | 2
  ┣ 📜requirements.txt
  ┣ 📜style.css
 ```
-## Explicação da Atividade
-A atividade proposta demanda conceitos de alguns serviços AWS, machinelearning com Pycaret para Automl e streamlit para criação de dahsboards para visualização das predições realizadas. O objetivo é enviar um arquivo CSV para a API de um  modelo machine learning gerado pelo Pycaret e retorna no formato JSON a predição de cada linha do Parquet.
-Consoante a isso, o arquivo parquet selecionado pelo aluno foi "Customer Segmentation". 
+## Descrição da Atividade
+A atividade proposta envolve o uso de vários serviços e tecnologias, incluindo AWS (Amazon Web Services), PyCaret, Streamlit e FastAPI, para criar uma aplicação que aceita um arquivo CSV como entrada, envia-o para um modelo de machine learning e retorna as previsões em formato JSON. O objetivo é prever o "Spending Score" com base em dados de um conjunto de dados chamado "Customer Segmentation". O conjunto de dados inclui as seguintes colunas:
 
-As colunas contidas nesse dataframe são:
-- CustomerID
-- Gender 
-- Age
-- Annual Income (k$) - COLUNA RENOMEADA APENAS PARA "INCOME" POR MOTIVOS DE PRATICIDADE
-- Spending Score (1-100) - COLUNA RENOMEADA APENAS PARA "SCORE" POR MOTIVOS DE PRATICIDADE
+CustomerID
+Gender
+Age
+Annual Income (k$) (renomeado para "Income" por questões de praticidade)
+Spending Score (1-100) (renomeado para "Score" por questões de praticidade)
+Tecnologias Utilizadas
+Streamlit
+Descrição: Streamlit é uma ferramenta de código aberto que permite a criação de aplicativos web de forma simples, sem a necessidade de conhecimentos avançados em desenvolvimento frontend. Neste projeto, o Streamlit é usado para criar uma interface de usuário para carregar arquivos CSV, exibir gráficos e enviar os dados para o modelo de machine learning.
 
-# Tecnologias usadas
+Estrutura: A estrutura do projeto inclui um diretório chamado "pages" onde o Streamlit é utilizado para criar diferentes páginas, incluindo uma página para carregar o arquivo CSV e outra página para visualizar as previsões.
 
-As tecnologias usadas para essa ponderada são listadas abaixo e descritas:
-## Streamlit
-Streamlit é uma ferramenta Open Source que permite construir aplicações web sem necessidade de conhecimentos avançados em desenvolvimento frontend. No caso da ponderada, ele consome os dados diretamente do arquivo CSV na página main.py.
-Além disso, a estrutura do streamlit contém um diretório chamado pages, com o predict consumindo da API de predição. 
+Visualizações: O Streamlit exibe três tipos de gráficos diferentes: um gráfico de comparação entre idade e "Select data" (que pode ser "Income" ou "Score"), além de histogramas que relacionam idade com frequência e frequência com "Select data".
 
-Para visualização, optei por três gráficos diferentes:
+## AWS - EC2
+Descrição: O Amazon Elastic Compute Cloud (Amazon EC2) é um serviço de computação em nuvem que permite a criação e gerenciamento de máquinas virtuais escaláveis em um ambiente de nuvem. No projeto, um aluno criou uma instância EC2 na AWS para hospedar a aplicação.
 
-- Gráfico de comparação de Age x Select data. Com essa última variável podendo assumir dois valores: Income e Score
+Instância EC2: O aluno criou uma instância EC2 para hospedar a aplicação. Uma imagem da instância em execução é exibida na imagem chamada "instance.png".
 
-<p align="center">
-<img src="(content/main_graph.png)">
+## Modelo e Backend
+PyCaret: PyCaret é uma biblioteca em Python que simplifica o desenvolvimento e implantação de modelos de machine learning. Foi utilizado para treinar um modelo de machine learning com base no conjunto de dados "Customer Segmentation". O modelo é exportado em um arquivo PKL.
 
-<p align="center"> 1 — Demonstração do processo manual de separação de amostras realizado pelo IPT.</p>
+FastAPI: FastAPI é um framework web em Python usado para criar APIs de maneira rápida e fácil. Foi utilizado como o backend da aplicação para receber os arquivos CSV, carregar o modelo treinado e retornar as previsões em formato JSON.
 
-</p>
-
-
-**Link para o DockerHub**: https://hub.docker.com/repository/docker/antonioangelo2/entrega5/general
-
-## Como Executar:
+## Como Executar o Projeto Localmente
 ### Localmente
-Para fazer o pull da imagem contida no dockerhub basta usar o seguinte comando no terminal: 
-```docker push antonioangelo2/entrega5:tagname```
+Para executar o projeto localmente, siga os seguintes passos:
 
-Após isso, rode o comando ```docker images``` para garantir que a imagem está contida no docker.
+Baixe o arquivo do projeto do GitHub disponibilizado pelo aluno.
 
-Rode o comando ```docker run -d --name <nome-do-seu-container> -p 8000:8000 antonioangelo2/entrega5:v1.0``` para criar um container e rodá-lo, a fim de executar a aplicação.
+Navegue até a pasta chamada "amb" no projeto e entre na pasta "Scripts". Em seguida, ative o ambiente virtual executando o comando ```activate```.
 
-Após isso, projeto pode ser acessado em **(http://localhost:8000)**
+Volte para o diretório raiz do projeto.
 
-Pronto. tudo certo para requisitar uma predição. Agora basta usar a URL do modelo com a API específica (http://localhost:8000/predict).
+Instale as dependências do projeto executando o comando ```pip install -r requirements.txt".```
 
-O dataset escolhido trata-se de um dataset de score de gasto com base nas seguintes características: gênero, idade, Income(quanto de dinheiro esse consumidor ganha anualmente em milhares). Fora esses, o Id costumer também estava contido no dataset, porém, ao gerar o Pycaret, optei por ignorar essa feature, pois se trata de uma feature irrelevante ao modelo.
-<br>
+Navegue até a pasta "Semana 7" no projeto e execute o seguinte comando para iniciar o servidor FastAPI:
 
-Por fim, para rodar o modelo, basta acessar um softare de teste de API, thunderclient, por exemplo, e passar um Json semelhante a essa na URL específica do modelo
-{
-    "Gender": "Male",
-    "Age": 30,
-    "Income": 15
-}
+```uvicorn main:app --host 0.0.0.0 --port 8000```
 
-O resultado esperado é um retorno de predição do score de gasto.
+Abra um segundo prompt de comando, navegue até a pasta "Semana 7" novamente e execute o seguinte comando para iniciar a aplicação Streamlit:
+```streamlit run main.py```
+
+A aplicação estará disponível localmente em **( http://localhost:8501)**
+
+Dessa forma, você poderá interagir com a aplicação, carregar arquivos CSV, visualizar gráficos e obter previsões com base no modelo de machine learning treinado. Certifique-se de que todas as etapas anteriores tenham sido executadas corretamente para garantir o funcionamento adequado do projeto.
+
+
 
 
