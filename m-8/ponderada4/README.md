@@ -9,9 +9,9 @@ Antonio Angelo Teixeira | Engenharia da Computação | 8 | 2
 ## DESCRIÇÃO DA ATIVIDADE
 
 
-A proposta da segunda atividade ponderada visa a implementação de dois lançadores contendo pacotes distintos. O primeiro lançador tem como finalidade inicializar o pacote de navegação, composto por três módulos essenciais: RVIZ para visualização e abertura do NAV2, Gazebo para a exibição visual e o Cartographer. Já o segundo lançador será responsável por ativar o pacote do script desenvolvido pelo aluno, o qual assume a responsabilidade de definir a pose inicial no Gazebo e especificar a trajetória de pose para o robô simulado seguir.
+A proposta da segunda atividade ponderada visa a implementação de um nó ROS que seja um chatbot simples com instruções customizadas para ajudar um usuário a pesquisar normas de segurança em ambientes industriais. O sisema deve contar com uma interface gráfica e responder de forma sucinta e clara sobre o que lhe foi perguntado.
 
-O propósito central dessa atividade é desafiar o aluno a criar um mapa integralmente utilizando as funcionalidades oferecidas pelo NAV2. O enfoque está na avaliação e aplicação dos conhecimentos em ROS2, utilizando pacotes e lançadores de forma coordenada para atingir o objetivo proposto
+Dessa forma, optei por realizar essa atividade usando o Ollama, um LLM open source desenvolvido pela Meta. O propósito central dessa atividade é desafiar o aluno a fazer seu próprio LLM, integrado a uma interface gráfica, optei pelo gradio, que carregaria localmente. O enfoque está na avaliação e aplicação dos conhecimentos em ROS2, utilizando integração com uma api de modelo pronta e importação e integração de módulos com o gradio.
 
 # COMO EXECUTAR O PROJETO
 
